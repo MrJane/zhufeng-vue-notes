@@ -2,9 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <!--文件右键 Copy Relative Path 可以拷贝文件的相对路径-->
 </head>
 <body>
-$END$
+<!--父亲绑定一些事件，儿子触发这个事件，将参数传递过去，单向数据流，父亲数据刷新儿子数据也就刷新-->
+<div id="app">
+    父亲：{{money}}
+    <child :m="money" @change-money="things"></child>
+    <!--注意@change-money这个不能用驼峰@changeMoney-->
+    <!--给儿子绑定一个事件changeMoney  相当于child:$on('changeMoney',things)-->
+</div>
+<script>
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan',
+            money: 400
+        },
+        methods: {
+            things (val) {
+                alert(val)
+            }
+        },
+        components: {
+            child: {
+                props: ['m'],
+                template: '<div>儿子{{m}}<button @click="getMoreMoney">要多点钱</button></div>',
+                // <div>儿子{{m}}<button @click="this.$emit('change-money', 800)">要多点钱</button></div> 考虑为什么不能直接触发
+                methods: {
+                    getMoreMoney () {
+                        this.$emit('change-money', 800)
+                    }
+                }
+            }
+        }
+
+
+    })
+</script>
 </body>
 </html>

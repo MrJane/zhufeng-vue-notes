@@ -8,12 +8,21 @@
 </head>
 <body>
 <div id="app">
-
+    <!--<modal><h1>是否删除</h1></modal> 我们想用里面h1标签 我们就要用slot组件-->
+    <modal><h1>是否删除</h1></modal>
+    <modal><h1>是否提交</h1></modal>
+    <modal><h1 slot="title">是否提交</h1><P slot="content">内容</P></modal>
 </div>
 <!--模板中只有一个根元素-->
 <template id="modal">
     <div>
-        <h1></h1>
+        <!--slot中可以放一些默认的内容，如果传递内容则替换掉，如果modal组件里传了如上h1则会替换掉slot里的p标签内容-->
+        <slot name="defualt"><p>默认的标题</p></slot>
+        <slot></slot>
+        <!--slot有name属性 可以对应内容的slot属性 插入相应的地方 如上面h1里的slot=title就会插入到slot里name=title上
+        如果没有slot名字的标签会默认放置在slot的name=defualt中
+        -->
+        <slot name="title"></slot>
     </div>
 </template>
 <script>
