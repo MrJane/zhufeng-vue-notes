@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{num|tofixed}}
+    <!--指令第一个参数是|前面的内容 后面的参数依次类推-->
+    {{num|tofixed2(3)}}
+</div>
+<script>
+    //
+    let vm = new Vue({
+        el: '#app',//
+        data: {
+            num: 1.23564//
+        },
+        filters:{
+            tofixed(value){ //这里的this 指向window
+                return value
+            },
+            tofixed2(value,param1){
+                return value.toFixed(param1) // value代表管道符前面的内容 param1代表是tofixed2传递的参数
+            }
+        }
+    })
+</script>
+</body>
+</html>

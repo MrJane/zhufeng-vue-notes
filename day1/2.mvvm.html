@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--表单元素 input select ...-->
+    {{msg}}
+    <!--vue的指令：只是DOM的行间属性，什么叫行间属性：比如<div a="1"></div> a就是div的属性，但vue给这类属性赋予一定的意义
+    来实现特殊的功能，所有的指令都以v-开头；指令包括内置指令如：v-if v-bind,还有自定义指令，指令后面都是变量-->
+    <input type="text" v-model="msg">
+    <!--表单元素：value属性默认情况下会被vue忽略掉 还有selected checked 都没有意义 v-model会将data里变量msg
+    赋予输入框，输入框的值改变会影响数据 所谓双向绑定-->
+    <!--原生写双向绑定 利用Object.defineProperty-->
+</div>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan'
+        }
+    })
+</script>
+</body>
+</html>

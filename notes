@@ -1,0 +1,14 @@
+VUE中数组的变异（括号中能改变原数组的方法）
+    操作数组的的方法：(pop,push unshift shift splice reverse sort) indexof lastindexof concat slice
+
+   用的比较的数组方法:forEach filter map find map some every reduce
+
+安装vue
+cdn的方式
+npm安装方式
+npm init初始化项目会生成一个package.json文件，名字不能用大写特殊字符而且不能和包的名字相同;package.json不能写注释
+可以用npm init -y 但是name就会是文件夹名字，所以文件夹名字要符号上述规则
+在package.json文件 "dependencies": { 输入包名回车会弹出版本选择
+                   "vue": "^2.5.17",
+                   "react": ""
+                 }

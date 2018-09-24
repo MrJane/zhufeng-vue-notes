@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <!--文件右键 Copy Relative Path 可以拷贝文件的相对路径-->
+    <style>
+        .drag{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--指令后面要是变量这写red会报错 -->
+    <!--<div v-color="red">红了吗</div>-->
+    <div v-color="flag">红了吗</div>
+    <!--拖拽指令-->
+    <div v-drag class="drag"></div>
+</div>
+<script>
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag: 'red'
+        },
+        directives: {
+            //注意指令命名：v-color-red 定义的时候要驼峰 colorRed 不能用中线
+            color (el, bindings) {//指代的是操作的Dom元素
+                console.log(arguments)//打印出来五个参数
+                el.style.background = bindings.value;
+                //0: div
+                // 1: {name: "color", rawName: "v-color", value: "red", expression: "flag", modifiers: {…}, …}
+                //2: VNode {tag: "div", data: {…}, children: undefined, text: undefined, elm: div, …}
+                //3: VNode {tag: "", data: {…}, children: Array(0), text: undefined, elm: undefined, …}
+                //4: undefined
+            },
+            drag (el) {
+                el.onmousedown = function (e) {
+                    var disX = e.pageX - el.offsetLeft;
+                    var disY = e.pageY - el.offsetTop;
+                    document.onmousemove = function (e) {
+                        el.style.left = e.pageX - disX + 'px';
+                        el.style.top = e.pageY - disY + 'px';
+                    }
+                    document.onmouseup = function (e) {
+                        document.onmousemove = document.onmouseup = null;
+                    }
+                    e.preventDefault()
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <!--文件右键 Copy Relative Path 可以拷贝文件的相对路径-->
+</head>
+<body>
+<div id="app">
+  {{msg}}
+</div>
+<script>
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan'
+        },
+        watch:{ //只有值变化的时候才会触发，支持异步
+            msg(newVal,oldVal){//watch的属性名要和观察的属性一致 msg 对应msg
+                    console.log(newVal,oldVal)
+            }
+        }
+    })
+</script>
+</body>
+</html>

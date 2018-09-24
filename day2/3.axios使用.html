@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <!--基于Promise 不依赖其他类库 是挂在Window上的-->
+    <script src="../node_modules/axios/dist/axios.js"></script>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+    let vm = new Vue({
+        el: '#app',//
+        data: {
+            products: []//
+        },
+        created () { //数据初始化调用，this也指向vm实例
+            /*axios.get('./carts.json').then(function (res) {
+                this.products = res.data; //注意用回调函数写 this是指的window  我们要改成箭头函数 this指向vm实例
+            }, function (err) {
+                console.log(err)
+            })
+            */
+            axios.get('./carts.json').then((res)=>{
+                this.products = res.data;
+                }
+            ).then(err=>{console.log(err)})
+        }
+    })
+</script>
+</body>
+</html>

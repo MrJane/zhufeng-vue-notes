@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <!--文件右键 Copy Relative Path 可以拷贝文件的相对路径-->
+</head>
+<body>
+<div id="app">
+    <!--{{msg}} 这样报警告 未定义-->
+    <!--{{obj.name}} 即使obj没有name属性 也不会报错-->
+</div>
+<script>
+    //vue会循环data里的数据(数据劫持)依次的增加getter setter方法
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            obj: {}
+        }
+    })
+    //使用变量时先要初始化下，否则新加的属性不会导致页面刷新，因为数据劫持没有添加getter setter 方法，
+    //我们没有初始化数据 可以用vm.$set()
+    vm.$set(vm.obj,'name','zhangsan') //此方法可以给对象添加响应式的数据变化，参数；给谁加 加什么属性 值是什么 三哥参数
+    //$set方法假如要添加很多属性 显得很繁琐，用替换原对象方法
+    vm.a = {name:'zhangsan',age:24,sex:'男'}
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--原生-->
+    <select name="" id="select" multiple>
+        <!--select如果要多选加multiple属性-->
+        <option value="1">北京</option>
+        <option value="2">上海</option>
+        <option value="3">深圳</option>
+        <!---->
+    </select>
+    <!--假如a是1就会是北京选中 2 就是上海选中空就没有选中-->
+    <select name="" id="" v-model="a">
+        <!--这样的话假如前面是加一个空option就会有问题，要在空option设置disable属性让其不能选择-->
+        <option value="" disabled>请选择</option>
+        <option value="1">北京</option>
+        <option value="2">上海</option>
+        <option value="3">深圳</option>
+        <!--假如value没有写 取值的话v-model绑定a取值就是标签里的内容‘北京’‘上海’‘深圳’-->
+        <!--如果select多选框，则数据类型要是数组类型-->
+    </select>
+    {{a}}
+    <!--原生JS把radio变成一组加name属性，vue则用v-model-->
+    <!--radio也要加value属性-->
+    <input type="radio" v-model="sex" value="男">男
+    <input type="radio" v-model="sex" value="女">女
+</div>
+</body>
+<script>
+    select.onchange = function () {  //原生JS
+        alert(this.value)
+    };
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            a: '1',
+            sex: '男'
+        }
+    })
+</script>
+</html>

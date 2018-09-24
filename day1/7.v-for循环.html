@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<!--以前循环就是拼接字符串 然后innerHtml-->
+    <!--vue提供了一个指令v-for 解决循环问题 更高效 会复用原来的DOM结构-->
+
+    <ul>
+        <!--要循环谁就加在谁的身上增加v-for属性-->
+        <!--默认是value of 数组 也可以 （value，index） of 数组 ；of 和in 是等价的-->
+        <li v-for="item in fruits">{{item.name}}</li>
+        <li v-for="(item,index) of fruits"></li>
+        <!--循环可以循环数字和字符串如下：
+        <li v-for="c in 'aaaa'">{{c}}</li>
+        <li v-for="c in 5">{{c}}</li>
+        -->
+
+    </ul>
+</div>
+<script>
+
+    let vm = new Vue({
+        el: '#app',//告诉vue管理哪个部分 传DOM
+        data: {
+            fruits: [{name:'香蕉'},{name:'苹果'},{name:'西瓜'}]
+        }
+    })
+</script>
+</body>
+</html>

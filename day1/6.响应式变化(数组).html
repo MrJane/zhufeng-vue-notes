@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <!--文件右键 Copy Relative Path 可以拷贝文件的相对路径-->
+</head>
+<body>
+<div id="app">
+    {{arr[1]}} <!--显示2-->
+    {{arr}} <!--显示[1,2,3,4,5]-->
+</div>
+<script>
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            arr: [1, 2, 3, 4, 5]
+        }
+    });
+    vm.arr[0] = 100; //去改变数组中的某一个是监控不到的 vm.arr[0] = 100 错误写法，还有vm.arr.length = 2这种也是监控不到也是错误写法
+    //数组变异方法：pop push shift unshift sort reverse splice 这些能监控到
+    vm.arr.reverse() //这个页面就会显示数组的倒序
+    vm.arr = vm.arr.map((item)=>item*=3);//这个也可以相当于给新的数组重新赋值
+</script>
+</body>
+</html>

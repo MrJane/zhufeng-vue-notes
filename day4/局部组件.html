@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+    //局部组件三部曲：1.创建这个组件2.注册这个组件3.引用这个组件
+    let mycomp = {template:'<div>刘很漂亮</div>'};//这样一个对象就是一个组件
+    //组件是相互独立的，不能直接跨作用域，实例vm也是一个组件，组件中拥有生命周期函数
+    let comp1 ={template:'<div>组件1</div>'}
+    let comp1 ={template:'<div>组件2</div>'}
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan'
+        }
+    })
+</script>
+</body>
+</html>

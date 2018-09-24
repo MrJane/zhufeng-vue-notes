@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="input">
+<script>
+    let obj = {};
+    let temp = {};
+    Object.defineProperty(obj, 'name', {
+        get () { //取obj name属性值调用get方法
+            // return 1
+            return temp['name']
+        },
+        set (val) { //给obj赋值
+            // obj.name=val 赋值不能这样写会导致死循环，一赋值就会调用set方法就死循环
+            //我们采用三方变量
+            temp['name'] = val;  //改变temp的结果
+            input.value = val;  //将值赋予输入框
+        }
+    });
+    input.value = obj.name; //页面一加载，会调用get方法
+    input.addEventListener('input', function () { //等待输入框值变化
+        obj.name = this.value //输入框值变化会调用set方法
+    })
+    //之前给对象家属性obj.a=1 现在利用Object.defineProperty给对象加属性
+    // Object.defineProperty(obj,'name',{
+    //     configurable:true,//是否可配置 比如我删除obj.name属性 true就可以 false 就不行
+    //     writable:true, //是否可可以给属性赋值 true可以 false不可以
+    //     enumerable:tue, //是否可枚举 即是否可以循环
+    //     value:1
+    // })
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--修饰符：@click.stop 阻止冒泡 @click.capture 捕获 @click.prevent 阻止默认事件 @click.once只触发一次
+        @click.self 判断事件源 只有点击事件落在本身元素才触发
+    -->
+
+    <!--<div @click.capture="parent">  先执行捕获-->
+    <div @click.capture.stop="parent">
+        <!--.capture.stop阻止事件传播 假如点了grandson 也只会弹出parent,阻止了事件传播-->
+        parent
+        <div @click="son">son
+            <!--<div @click.stop="grandson">grandson</div>  阻止冒泡-->
+            <div @click="grandson">grandson</div>
+        </div>
+    </div>
+</div>
+<script>
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan'
+        },
+        methods:{
+            parent(){
+                alert('parent')
+            },
+            son(){
+                alert('son')
+            },
+            grandson(e){
+                // e.stopPropagation();//在方法内部写上这个也可以阻止冒泡，vue有自带修饰符阻止.stop
+                alert('grandson')
+            }
+        }
+    })
+</script>
+</body>
+</html>

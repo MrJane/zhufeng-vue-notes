@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <!--文件右键 Copy Relative Path 可以拷贝文件的相对路径-->
+</head>
+<body>
+<div id="app">
+    {{msg}}
+    <!--常用指令:v-text等价于{{}} 但是大括号加载会有闪烁情况；为什么会产生双大括号闪烁情况 因为页面加载时从上而下加载
+    JS代码在下面 DOM在上面所以会产生闪烁，用v-text就不会 因为标签里没有内容，假如有内容也会闪烁
+    <div v-text="msg">world</div>  标签内如有内容也会被msg替换掉 world会被替换掉
+    -->
+        <div v-text="msg"></div>
+    <!--v-once 只绑定一次，当数据再发生变化也不会导致页面刷新，这个和其他指令用法不一样不需要赋值，在标签内加双大括号-->
+    <div v-once>{{msg}}</div>
+    <!--v-html,把html字符串当做解析HTML渲染，如下会渲染加粗的‘大’-->
+    <div v-html="bold"></div>
+</div>
+<script>
+    //引入vue后给你一个Vue构造函数
+    let vm = new Vue({
+        el: '#app',//告诉vue管理哪个部分 传DOM
+        data: {
+            msg: 'zhangsan',//data里的数据会被vm所代理,可以通过vm.msg获取
+            bold:'<b>大</b>'
+        }
+    })
+</script>
+</body>
+</html>

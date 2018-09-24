@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--原生JS事件-->
+    <div onclick="fn()" id="btn">点击我啊</div>
+    <!--fn如果用下面ifee会报未定义，注意的是所有绑定的方法都是Window的应该绑fn2,还有为什么绑定点事件函数要加括号：fn()
+    因为onclick其实是一个函数，可以打印下  console.log(btn.click),所以函数要加括号
+    -->
+    <!--vue绑定事件-->
+    <div v-bind:click="fn"></div>
+    <!--<div v-bind:'事件类型'=""></div>--v-bind可以简写@:fn可以加括号和不加括号，不加括号自动传event对象
+    加括号就是要传参数但不会默认传event对象参数需要手动传$event>
+    <!--总结：如果不传递参数，则不要写括号会自动传入事件源，如果加括号了就要手动传递$event事件源-->
+</div>
+<script>
+    //原生
+    (function () {
+        function fn () {
+            alert('fn1')
+        }
+    })();
+
+    function fn2 () {
+        alert('fn2')
+    }
+
+    let vm = new Vue({
+        el: '#app',
+        data: { //data里都放的是数据 （放函数也行）
+            msg: 'zhangsan',
+            fn:1
+        },
+        methods: {
+            fn(){ //这会报错 fn已经在data里定义了，注意methods和data会全部放到vm上，而且名字不能冲突，methods中的this指向的是实例即都是vm 根实例
+                alert(1)
+            },
+            fn2:()=>{
+                alert(this) //这个this指向Window methods里的方法不能用箭头函数
+            }
+        }
+    })
+</script>
+</body>
+</html>

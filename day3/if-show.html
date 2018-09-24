@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <!--文件右键 Copy Relative Path 可以拷贝文件的相对路径-->
+</head>
+<body>
+<div id="app">
+    <div v-if="false">刘很漂亮</div>
+    <!--<div>哈可以</div> v-else 要与v-if连着写中间不能有其他内容不然会报错-->
+    <div v-else>刘不漂亮</div>
+
+<!--template 是vue提供给我们的，没有实际任何意义，用来包裹元素的，v-show 不支持template标签 只有v-if使用-->
+    <template v-if="true">
+        <div>刘很漂亮</div>
+        <div>刘很漂亮</div>
+        <div>刘很漂亮</div>
+    </template>
+    <!--<div v-if="true">-->
+    <!--<div>刘很漂亮</div>-->
+    <!--<div>刘很漂亮</div>-->
+    <!--<div>刘很漂亮</div>-->
+    <!--这样会多一个div标签  我们可以加template标签-->
+    <!--</div>-->
+    <div v-else>刘不漂亮</div>
+<!---->
+    <button @click="cut=!cut"></button>
+    <!--默认情况下切换DOM时候相同结构复用，如果不需要复用就要加key，如下面input没有加key input标签不会被切换，我们要给她加key-->
+    <template v-if="">
+        <label>注册</label>
+        <input type="text" key="1">
+    </template>
+    <template v-else>
+        <label>登陆</label>
+        <input type="text" key="2">
+    </template>
+</div>
+<script>
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan',
+            cut:true
+        }
+    })
+</script>
+</body>
+</html>

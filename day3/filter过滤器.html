@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+{{'hellword'|my}}
+</div>
+<div id="root">
+    <!--{{'hellword'|filter1}}  filter1只是在vm里注册所以不能再root里使用，要想公用过滤器就要全局注册
+    Vue.filter方法-->
+    {{2|my}}
+</div>
+<script>
+    Vue.filter('my',function (val) {
+        return val + 'jane';
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan'
+        },
+        filters: {
+            filter1 (val) {
+                return val + 'jane'
+            }
+        }
+    })
+    let root = new Vue({
+        el: '#root',
+        data: {
+            msg: 'zhangsan'
+        }
+    })
+</script>
+</body>
+</html>

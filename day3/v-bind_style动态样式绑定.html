@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <style>
+        .x {
+            background-color: blue
+        }
+
+        .y {
+            font-size: 30px
+        }
+        .z{
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+<div id="app">
+   <!--<div style="font-size: 30px;" :style="'font-size:50px'">刘很漂亮</div> 这个字体为50px 还是程序执行有关 JS代码后执行添加的style覆盖前面的 -->
+    <!--对象方式：<div style="font-size: 30px;" :style="{backgroundColor:'red'}">刘很漂亮</div>属性有中'-'要改成驼峰形式，值要单引号-->
+    <!--数组方式:<div :style="[sty1,styl2,{fontSize:'30px'}]">刘很漂亮</div>-->
+</div>
+<script>
+    //动态绑定样式两种方式,对象方式和数组方式
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan',
+            flag: true,
+            classX:'x',
+            classY:'y',
+            sty1:{backgroundColor:'red'},
+            sty2:{color:'red'}
+        }
+    })
+</script>
+</body>
+</html>

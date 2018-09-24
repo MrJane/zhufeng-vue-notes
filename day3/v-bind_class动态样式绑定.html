@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <style>
+        .x {
+            background-color: blue
+        }
+
+        .y {
+            font-size: 30px
+        }
+        .z{
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+<div id="app">
+    <!--class绑定的样式 和:class绑定的样式不冲突-->
+    <!--对象语法：{classNameA:istrue,classNameB:istrue} 每个属性的值为true则为添加这个类名-->
+    <div class="x y" :class="flag?'z':''"></div>
+    <!--flag为true则添加类z，假如有很多类要加，可以放对象-->
+    <div class="x" :class="{z:flag,y:false}">测试</div> <!--这个标签上绑定样式有x z-->
+
+    <!--数组方式-->
+    <div class="" :class="[classX,classY]">测试</div><!--中括号classX,classY为变量为把对应的值变为类名，即这个元素添加的类为x,y如果不是变量要加单引号-->
+    <!--<div class="" :class="[classX,classY,'z']">测试</div>  不是变量要加单引号-->
+</div>
+<script>
+    //动态绑定样式两种方式,对象方式和数组方式
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan',
+            flag: true,
+            classX:'x',
+            classY:'y'
+        }
+    })
+</script>
+</body>
+</html>
