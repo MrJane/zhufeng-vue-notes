@@ -9,9 +9,12 @@
 <body>
 <div id="app">
     <!--<modal><h1>是否删除</h1></modal> 我们想用里面h1标签 我们就要用slot组件-->
+    <!--这里放的内容均属于父级vm实例模板的，只有属性名属于组件的-->
     <modal><h1>是否删除</h1></modal>
     <modal><h1>是否提交</h1></modal>
     <modal><h1 slot="title">是否提交</h1><P slot="content">内容</P></modal>
+    <modal><h1 @click="fn">是否提交</h1></modal>
+    <!--假如有点击事件函数fn时候，这个fn是属于父组件vm的传给modal组件的-->
 </div>
 <!--模板中只有一个根元素-->
 <template id="modal">

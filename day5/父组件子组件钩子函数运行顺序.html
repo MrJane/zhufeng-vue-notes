@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <!--文件右键 Copy Relative Path 可以拷贝文件的相对路径-->
+</head>
+<body>
+<!--父组件和子组件同时拥有mounted钩子函数 会先走谁？-->
+<!--需要子组件挂载完成后才能挂载父组件-->
+<div id="app">
+    <child ref="child"></child>
+</div>
+<script>
+    let child = {
+        template:'<div>自组件</div>',
+        data(){
+            return{
+                arr:[1,2,3]
+            }
+        },
+        mounted(){
+
+            this.arr = [4,5,6]//因为是异步方法会导致父组件拿到的是 1 2 3
+        }
+    }
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan'
+        },
+        mounted(){
+            this.$nextTick(()=>{ //想操作DOM,就加一个nextTick
+                console.log(this.$refs.child.$el.innerHTML)
+            })
+            console.log(this.$refs.child.$el.innerHTML) //这里拿到是 1 2 3 ，因为mounted是异步方法
+        },
+        components:{
+            child
+        }
+    })
+</script>
+</body>
+</html>

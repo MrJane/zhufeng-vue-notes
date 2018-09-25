@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <!--文件右键 Copy Relative Path 可以拷贝文件的相对路径-->
+</head>
+<body>
+<div id="app">
+    <input type="radio" v-model="radio" value="home">home
+    <input type="radio" v-model="radio" value="list">list
+    <!--template ,slot transition component 这些都是vue自带的组件-->
+    <keep-alive>
+        <!--一般作用缓存：为的是后面的路由做准备，如果缓存了就不会再走created mounted钩子函数-->
+        <!--子组件和富足家-->
+        <component :is="radio"></component>
+        <!--根据is显示相应的组件is=组件名-->
+    </keep-alive>
+</div>
+<script>
+    let home = {
+        template: '<div>home</div>',
+        beforeDestroy () {
+            alert('销毁')
+        }, //用这个函数判断切换组件会不会销毁
+        mounted () {
+            alert('挂载')
+        }//证明每次切换组件 这个方法都会再执行一次，这样会耗性能，我们并不需要它执行,希望把它缓存下来
+        // 我们利用keep-alive组件进行缓存
+
+    };
+    let list = {
+        template: '<div>list</div>',
+        beforeDestroy () {
+            alert('销毁')
+        },
+        mounted () {
+            alert('挂载')
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'zhangsan',
+            radio: 'home'
+        },
+        components: {
+            home, list
+        }
+    })
+</script>
+</body>
+</html>
